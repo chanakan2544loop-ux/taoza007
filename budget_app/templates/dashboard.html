@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Budgety</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dash-body">
+
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="nav-brand">🌸 <span>Budgety</span></div>
+    <div class="nav-right">
+      <span id="nav-user" class="nav-user"></span>
+      <button class="btn-ghost" id="settings-btn">⚙️ ตั้งค่า</button>
+      <button class="btn-ghost" id="logout-btn">ออกจากระบบ</button>
+    </div>
+  </nav>
+
+  <!-- Tab Bar -->
+  <div class="tab-bar">
+    <button class="tab active" data-tab="daily">📅 รายวัน</button>
+    <button class="tab" data-tab="weekly">📆 รายสัปดาห์</button>
+    <button class="tab" data-tab="monthly">🗓️ รายเดือน</button>
+  </div>
+
+  <main class="main-content">
+
+    <!-- ─── DAILY TAB ───────────────────────────────── -->
+    <section id="tab-daily" class="tab-section active">
+      <div class="summary-grid">
+        <div class="summary-card card-pink">
+          <div class="card-label">งบวันนี้</div>
+          <div class="card-amount" id="daily-budget">฿0</div>
+        </div>
+        <div class="summary-card card-mint">
+          <div class="card-label">ใช้ไปแล้ว</div>
+          <div class="card-amount" id="daily-spent">฿0</div>
+        </div>
+        <div class="summary-card card-lavender">
+          <div class="card-label">คงเหลือ</div>
+          <div class="card-amount" id="daily-remaining">฿0</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>ใช้ไป</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Add Expense -->
+      <div class="add-card">
+        <h3 class="section-title">➕ บันทึกรายจ่าย</h3>
+        <div class="add-form">
+          <input type="text" id="item-name" placeholder="ซื้ออะไร? เช่น ข้าวเที่ยง" />
+          <input type="number" id="item-amount" placeholder="จำนวนเงิน (บาท)" min="0.01" step="0.01" />
+          <select id="item-category">
+            <option value="food">🍜 อาหาร</option>
+            <option value="drink">🧋 เครื่องดื่ม</option>
+            <option value="transport">🚌 เดินทาง</option>
+            <option value="shopping">🛍️ ช้อปปิ้ง</option>
+            <option value="health">💊 สุขภาพ</option>
+            <option value="entertainment">🎮 ความบันเทิง</option>
+            <option value="other">📦 อื่นๆ</option>
+          </select>
+          <button class="btn-primary" id="add-btn">บันทึก</button>
+        </div>
+      </div>
+
+      <!-- Expense List -->
+      <div class="list-card">
+        <h3 class="section-title">📋 รายจ่ายวันนี้ — <span id="today-label"></span></h3>
+        <div id="expense-list" class="expense-list">
+          <div class="empty-state">ยังไม่มีรายการวันนี้ 🌸</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── WEEKLY TAB ──────────────────────────────── -->
+    <section id="tab-weekly" class="tab-section">
+      <div class="summary-grid">
+        <div class="summary-card card-pink">
+          <div class="card-label">งบสัปดาห์นี้</div>
+          <div class="card-amount" id="weekly-budget">฿0</div>
+        </div>
+        <div class="summary-card card-mint">
+          <div class="card-label">ใช้ไปแล้ว</div>
+          <div class="card-amount" id="weekly-spent">฿0</div>
+        </div>
+        <div class="summary-card card-lavender">
+          <div class="card-label">คงเหลือ</div>
+          <div class="card-amount" id="weekly-remaining">฿0</div>
+        </div>
+      </div>
+      <div class="list-card">
+        <h3 class="section-title">📊 รายจ่ายแต่ละวัน (สัปดาห์นี้)</h3>
+        <div id="week-list" class="week-list"></div>
+      </div>
+    </section>
+
+    <!-- ─── MONTHLY TAB ─────────────────────────────── -->
+    <section id="tab-monthly" class="tab-section">
+      <div class="summary-grid">
+        <div class="summary-card card-peach">
+          <div class="card-label">งบเดือนนี้</div>
+          <div class="card-amount" id="monthly-budget">฿0</div>
+        </div>
+        <div class="summary-card card-mint">
+          <div class="card-label">ใช้ไปแล้ว</div>
+          <div class="card-amount" id="monthly-spent">฿0</div>
+        </div>
+        <div class="summary-card card-lavender">
+          <div class="card-label">คงเหลือ</div>
+          <div class="card-amount" id="monthly-remaining">฿0</div>
+        </div>
+      </div>
+      <div class="list-card">
+        <h3 class="section-title">📊 รายจ่ายรายวัน (เดือนนี้)</h3>
+        <div id="month-list" class="week-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3>⚙️ ตั้งค่างบประมาณ</h3>
+      <div class="field-group">
+        <label>งบประมาณรายสัปดาห์ (บาท)</label>
+        <input type="number" id="settings-weekly" min="1" />
+      </div>
+      <div class="modal-btns">
+        <button class="btn-primary" id="save-settings">บันทึก</button>
+        <button class="btn-ghost" id="close-settings">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
